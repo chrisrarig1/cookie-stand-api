@@ -3,7 +3,7 @@ import requests
 
 # NOTE: Adjust these settings as needed
 API_HOST = "http://localhost:8000"
-RESOURCE_URI = "things"
+RESOURCE_URI = "cookie_stands"
 USERNAME = "admin"
 PASSWORD = "admin"
 
@@ -95,9 +95,13 @@ class ApiTester:
         }
 
         data = {
-            "name": name,
-            "description": description,
-            "owner": owner,
+            "location": location ,
+            "description": description ,
+            "hourly_sales": hourly_sales ,
+            "minimum_customers_per_hour": minimum_customers_per_hour ,
+            "maximum_customers_per_hour": maximum_customers_per_hour ,
+            "average_cookies_per_sale": average_cookies_per_sale ,
+            "owner": owner ,
         }
 
         response = requests.post(url, json=data, headers=headers)
@@ -125,8 +129,12 @@ class ApiTester:
         original = self.get_one(id)
 
         data = {
-            "name": name or original["name"],
+            "location": location or original["location"],
             "description": description or original["description"],
+            "hourly_sales": hourly_sales or original["hourly_sales"],
+            "minimum_customers_per_hour": minimum_customers_per_hour or original["minimum_customers_per_hour"],
+            "maximum_customers_per_hour": maximum_customers_per_hour or original["maximum_customers_per_hour"],
+            "average_cookies_per_sale": average_cookies_per_sale or original["average_cookies_per_sale"],
             "owner": owner or original["owner"],
         }
 
